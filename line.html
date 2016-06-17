@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='UTF-8'>
+	<title></title>
+</head>
+<body>
+	<canvas id="canvas" width=1024 height=768 style="border:1px solid #aaa;display:block;margin:50px auto;">
+	您的浏览器不支持canvas.
+	</canvas>
+	<script>
+	window.onload=function(){
+		var canvas=document.getElementById('canvas');
+		if(canvas.getContext("2d")){
+			var context=canvas.getContext("2d");
+			//绘制直线
+			context.beginPath(); //创建线条起点
+			context.moveTo(100,100);
+			context.lineTo(600,600);
+			context.lineTo(100,600);
+			context.closePath(); //结束线条绘制
+			context.lineWidth=5; //线条粗细
+			context.strokeStyle="#F04422"; //线条颜色（可多种css表示方式）
+			context.stroke(); //开始绘制，据状态来绘制
+			//填充颜色
+			context.fillStyle="rgb(20,120,10)";
+			context.fill(); //据线条闭合情况填充
+			
+			context.beginPath(); //第二条线
+			context.moveTo(150,50);
+			context.lineTo(650,550);
+			context.lineTo(650,50);
+			context.closePath();
+			context.lineWidth=8;
+			context.strokeStyle="#005588";
+			context.stroke();
+			//填充颜色
+			context.fillStyle="rgb(160,20,20)";
+			context.fill();
+			
+			//绘制七巧板
+			var tangram = [
+				{piece:[{x:700,y:300},{x:780,y:300},{x:740,y:340}],color:"#caff67"},
+				{piece:[{x:700,y:300},{x:740,y:340},{x:700,y:380}],color:"#67becf"},
+				{piece:[{x:780,y:300},{x:780,y:340},{x:760,y:360},{x:760,y:320}],color:"#ef3d61"},
+				{piece:[{x:760,y:320},{x:760,y:360},{x:740,y:340}],color:"#f9f51a"},
+				{piece:[{x:740,y:340},{x:760,y:360},{x:740,y:380},{x:720,y:360}],color:"#a594c0"},
+				{piece:[{x:720,y:360},{x:740,y:380},{x:700,y:380}],color:"#fa8ecc"},
+				{piece:[{x:780,y:340},{x:780,y:380},{x:740,y:380}],color:"#f6ca29"}
+			];
+			
+			for(var block in tangram){
+				context.beginPath();
+				for(var point in tangram[block].piece){
+					if(point == 0){
+						context.moveTo(tangram[block].piece[point].x,tangram[block].piece[point].y);
+					}
+					else{
+						context.lineTo(tangram[block].piece[point].x,tangram[block].piece[point].y);
+					}
+				}
+				context.closePath();
+				context.lineWidth=1;
+				context.stroke();
+				context.fillStyle=tangram[block].color;
+				context.fill();
+			}
+		}
+		else{
+			window.alert("当前浏览器不支持canvas，请更换浏览器后重试");
+		}
+	}
+	</script>
+</body>
+</html>
