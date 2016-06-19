@@ -2,9 +2,23 @@
 <html>
 <head>
 	<meta charset='UTF-8'>
-	<title></title>
+	<title>弧线</title>
 </head>
 <body>
-	
+	<canvas id='canvas' width=1024 height=768 style="border:1px solid #aaa;display:block;margin:50px auto;">
+		您的浏览器不支持canvas
+	</canvas>
+	<script>
+		window.onload=function(){
+			var canvas=document.getElementById('canvas');
+			var context=canvas.getContext('2d');
+			//定义绘制
+			//context.arc( center-x , center-y , radius , beginAngle , closeAngle [,false]) 默认为顺时针
+			context.arc(300,300,200,0,1.5*Math.PI); //3点钟为0，6点钟为0.5PI ...
+			context.lineWidth=2;
+			context.strokeStyle="red";
+			context.stroke(); //开始绘制
+		};
+	</script>
 </body>
 </html>
